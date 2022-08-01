@@ -1,6 +1,17 @@
 from rest_framework import serializers
 from api.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+from django.contrib.auth.models import User
 
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'email', 'is_staff']
+
+# class PostSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = 
+#         PostSerializerfields = ['id','']
 
 class SnippetModelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,3 +47,5 @@ class SnippetSerializer(serializers.Serializer):
         instance.style = validated_data.get('style', instance.style)
         instance.save()
         return instance
+
+
