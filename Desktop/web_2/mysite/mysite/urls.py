@@ -27,8 +27,8 @@
 # ]
 
 from django.urls import path, include, re_path
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
+# from django.contrib.auth.models import User
+# from rest_framework import routers, serializers, viewsets
 
 from django.urls import path, include
 from rest_framework import permissions
@@ -52,19 +52,19 @@ schema_view = get_schema_view(
 )
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['url', 'username', 'email', 'is_staff']
 
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# # ViewSets define the view behavior.
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
-# Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+# # Routers provide an easy way of automatically determining the URL conf.
+# router = routers.DefaultRouter()
+# router.register(r'users', UserViewSet)
 
 
 
@@ -77,9 +77,9 @@ urlpatterns = [
     path('toy/', include('toy.urls'), name="toy"),
     path('polls/', include('polls.urls'), name="polls"),
     path('api/', include('api.urls')),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    # re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    # re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    # re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
