@@ -10,8 +10,18 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
 
+from rest_framework import generics
+from api.serializers import UserSerializer
+from django.contrib.auth.models import User
+
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 @api_view(['GET', 'POST'])
