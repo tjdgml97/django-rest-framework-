@@ -8,6 +8,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 #     path('snippets/<int:pk>/', views.snippet_detail),
 # ]
 urlpatterns = [
+    #이전에는 함수 - 현재는 class 로 작동하도록 urls연결 
     path('', views.api_root),
     path('snippets/', views.SnippetList.as_view(), name="snippet-list"),
     path('snippets/<int:pk>/', views.SnippetDetail.as_view(), name="snippet-detail"),

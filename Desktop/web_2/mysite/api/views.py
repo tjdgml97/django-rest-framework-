@@ -111,6 +111,8 @@ class SnippetDetail(APIView):
 # class, 함수형 차이 
 
 
+#위에 class 로 실행하면 밑에 작성한 functions 처럼 작동함 
+
 @api_view(['GET', 'POST'])
 def snippet_list(request, format=None):
     """
