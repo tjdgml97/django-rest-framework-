@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from api.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 from django.contrib.auth.models import User
+from blog.models import Post
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'content'] # "__all__"
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
