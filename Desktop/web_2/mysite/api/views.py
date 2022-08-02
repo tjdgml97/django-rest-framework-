@@ -54,8 +54,18 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'snippets': reverse('snippet-list', request=request, format=format),
         'questions': reverse('question-list', request=request, format=format),
-        'posts': reverse('post-list', request=request, format=format)
-    })
+        'posts': reverse('post-list', request=request, format=format),
+        'profile': reverse('profile', request=request, format=format),
+          })
+        
+@api_view(['GET'])
+def profile(request, format=None):
+    if request.method == "GET":
+        user = UserSerializer(request.user, context={'request': request})
+        return Response(user.data)
+
+        # 'posts': reverse('post-list', request=request, format=format)
+    
 
 
 class PostList(generics.ListCreateAPIView):
