@@ -22,7 +22,18 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 
 from blog.models import Post
-from api.serializers import SnippetSerializer, SnippetModelSerializer, UserSerializer, PostSerializer
+from polls.models import Question
+from api.serializers import QuestionSerializer, SnippetSerializer, SnippetModelSerializer, UserSerializer, PostSerializer
+
+class QuestionList(generics.ListCreateAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
+
+class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
 
 
 # class UserList(generics.ListCreateAPIView):
@@ -42,7 +53,7 @@ def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
         'snippets': reverse('snippet-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format),
+        'questions': reverse('question-list', request=request, format=format),
         'posts': reverse('post-list', request=request, format=format)
     })
 

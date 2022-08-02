@@ -2,6 +2,14 @@ from rest_framework import serializers
 from api.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 from django.contrib.auth.models import User
 from blog.models import Post
+from polls.models import Question
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['id', 'question_text', 'pub_date'] # "__all__"
+
+
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
